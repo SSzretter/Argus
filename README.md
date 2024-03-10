@@ -115,25 +115,39 @@ enable developer mode in discord - go to settings (bottom) , advanced, turn on d
   download and install python (3.11.8) 64bit (add to path/set enviornment variables if asked)  https://www.python.org/downloads/release/python-3118/  (do not install anything newer than 3.11.x)
   
   install github desktop (or similar) ,  https://github.com/vivekjoshy/Argus   , clone (can use the green code button - open with github desktop)
+  
   open cmd as administrator, run pip install -e . in the Argus root directory , this will install the python dependencies
+  
   create config.toml in root of Argus folder, paste contents from readme.md  (it should be in the same directory as pyproject.toml)
+  
    go to: https://discordapp.com/developers/applications/ , create application , bot, create or reset - copy token replace value in config.toml
       also in the bot settings page, enable presence, server members, message content intents and save
+      
    go to: sentry.io , sign in/create account, get started, python platform, configure sdk, skip framework, follow instructions on screen to install and copy / paste the url into sentry = in config.toml
+   
    go to: mongodb.com , start free, sign up, it will redirect to cloud.mongodb.com to finish the mongodb atlas signup process, select M0 (free) tier, (not sure if provider matters I used AWS), type a cluster name, create
     at the next screen create a username/password
     ??  connect from - I used my local enviornment and it automatically added my internet connection ip - not sure if cloud enviornment is a better choice or will work yet
     finish / close , on overview screen click get connection string button
     driver = python,  version = 3.11 or later, follow the on screen steps (run the install your driver command)
     copy/paste the mongodb+srv url into the uri = in config.toml  (replace <password> with your actual password)
+    
   to get the guild_id, right click the server name at the top and choose 'copy id' and paste that into config.toml guild_id = 
+  
  invite the bot - go to https://discordapp.com/developers/applications/ again , your application created earlier, oauth2 on left, use the oauth2 url generator - check 'bot', then 'administrator'
+ 
   (you should be logged into discord in your browser as server owner) - go to the url you just generated and add the bot to the server (the bot should show as offline in the list of members)
+  
   DO NOT DO THIS ?? (the bot should appear as a role)  -- make sure the bot is an admin - go to server settings, roles, add a role for 'admin' and turn on Administrator permission and add the bot to manage members
+  
    I had issues with permissions when running the setup roles command and you have to also go to server settings - roles and drag the role named after the bot up above any other role so its at the top
+   
  type argus in the argus to run the bot
+ 
  if it runs successfully and shows logged in and no 'errors' continue:
+ 
   in discord in rules channel created by the community creation process type:
+  
    $sync
    /setup roles      (and lots of roles should populate in your discord server settings - roles)
    /setup channels   (and you will see the channels being configured on the left)
