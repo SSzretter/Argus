@@ -149,9 +149,13 @@ enable developer mode in discord - go to settings (bottom) , advanced, turn on d
   in discord in rules channel created by the community creation process type:
   
    $sync
+   
    /setup roles      (and lots of roles should populate in your discord server settings - roles)
+   
    /setup channels   (and you will see the channels being configured on the left)
+   
   for level 2 boosted servers:  /setup icons
+  
    /global enable
 
 
@@ -159,31 +163,52 @@ enable developer mode in discord - go to settings (bottom) , advanced, turn on d
 
 
  SENTRY ERRORS - if sentry is configured and working errors will be sent there as well as to your email if configured that way
+ 
  DATABASE - view your data at cloud.mongodb.com
 
 
  one problem I ran into and resolved-
+ 
  run argus, produces error
+ 
     >argus
     pydantic.errors.PydanticImportError: `pydantic.datetime_parse:parse_datetime` has been removed in V2.
+    
  poetry.lock refers to version 1.10.6 but reqs.txt is version 2.6.3 - chaning it to 1.10.6 , ran pip uninstall pydantic , then ran pip install pydantic==1.10.6, then re-run pip install -e .
 
 
+
  note: I was able to use vscode to run __main__.py , enabled the python debugger extension, edit debug configuration and add a second configuration block in launch.json , add these lines
+ 
  "request": "launch",
+ 
  "purpose": ["debug-test"],
+ 
  "justMyCode": false,
+ 
  "subProcess": true,
+ 
 
   hint: in def main() you can add async.io around the bot.run line then you can step into it:  asyncio.run(bot.run(config["bot"]["token"], log_handler=None))
+  
 
   if you are having issues with pip commands, reboot then try removing these directories: (paths may be different on your system)
+  
     C:\Users\yourusername\AppData\Local\pip\cache
+    
     C:\Users\yourusername\AppData\Local\Temp
+    
     then run: pip freeze > reqs.txt   ,   pip uninstall -y -r reqs.txt
+    
     then run the pipinstall -e . and also run the mongodb and sentry pip installs
+    
 
 
 TODO:
+
+ CLEANUP / REFORMAT README
+
  MANUAL - commands, use
+ 
  better error checking / trapping for invalid command parameters
+ 
