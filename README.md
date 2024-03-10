@@ -99,13 +99,21 @@ The rest of the commands are self-explanatory, but you can find the [user manual
 WORK IN PROGRESS (DRAFT v1):
 
 in discord, create a new channel for this (left side of discord app, all the way down click plus button - community)
+
  DO NOT DO THIS -- I believe when you create the community it will create these channels for you : create two public text channels: rules and community-updates
+ 
  make sure you have 2fa enabled in discord!  (important) - settings, my account, enable authenticator app
+ 
 enable developer mode in discord - go to settings (bottom) , advanced, turn on developer mode
+
   go to server settings and enable community - get started - do let it create the rules and community updates channels 
+  
  windows install
+ 
   check add/remove programs, remove any versions of python other than 3.11.x
+  
   download and install python (3.11.8) 64bit (add to path/set enviornment variables if asked)  https://www.python.org/downloads/release/python-3118/  (do not install anything newer than 3.11.x)
+  
   install github desktop (or similar) ,  https://github.com/vivekjoshy/Argus   , clone (can use the green code button - open with github desktop)
   open cmd as administrator, run pip install -e . in the Argus root directory , this will install the python dependencies
   create config.toml in root of Argus folder, paste contents from readme.md  (it should be in the same directory as pyproject.toml)
