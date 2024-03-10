@@ -93,3 +93,75 @@ Once the channels, roles and icons are set up, you can enable the debating modul
 
 The rest of the commands are self-explanatory, but you can find the [user manual here](https://wiki.opendebates.net/en/argus/manual).
 
+
+---
+
+WORK IN PROGRESS (DRAFT v1):
+
+# in discord, create a new channel for this (left side of discord app, all the way down click plus button - community)
+#  DO NOT DO THIS -- I believe when you create the community it will create these channels for you : create two public text channels: rules and community-updates
+#  make sure you have 2fa enabled in discord!  (important) - settings, my account, enable authenticator app
+#  enable developer mode in discord - go to settings (bottom) , advanced, turn on developer mode
+#  go to server settings and enable community - get started - do let it create the rules and community updates channels 
+# windows install
+#  check add/remove programs, remove any versions of python other than 3.11.x
+#  download and install python (3.11.8) 64bit (add to path/set enviornment variables if asked)  https://www.python.org/downloads/release/python-3118/  (do not install anything newer than 3.11.x)
+#  install github desktop (or similar) ,  https://github.com/vivekjoshy/Argus   , clone (can use the green code button - open with github desktop)
+#  open cmd as administrator, run pip install -e . in the Argus root directory , this will install the python dependencies
+#  create config.toml in root of Argus folder, paste contents from readme.md  (it should be in the same directory as pyproject.toml)
+#   go to: https://discordapp.com/developers/applications/ , create application , bot, create or reset - copy token replace value in config.toml
+#      also in the bot settings page, enable presence, server members, message content intents and save
+#   go to: sentry.io , sign in/create account, get started, python platform, configure sdk, skip framework, follow instructions on screen to install and copy / paste the url into sentry = in config.toml
+#   go to: mongodb.com , start free, sign up, it will redirect to cloud.mongodb.com to finish the mongodb atlas signup process, select M0 (free) tier, (not sure if provider matters I used AWS), type a cluster name, create
+#    at the next screen create a username/password
+#    ??  connect from - I used my local enviornment and it automatically added my internet connection ip - not sure if cloud enviornment is a better choice or will work yet
+#    finish / close , on overview screen click get connection string button
+#    driver = python,  version = 3.11 or later, follow the on screen steps (run the install your driver command)
+#    copy/paste the mongodb+srv url into the uri = in config.toml  (replace <password> with your actual password)
+#  to get the guild_id, right click the server name at the top and choose 'copy id' and paste that into config.toml guild_id = 
+# invite the bot - go to https://discordapp.com/developers/applications/ again , your application created earlier, oauth2 on left, use the oauth2 url generator - check 'bot', then 'administrator'
+#  (you should be logged into discord in your browser as server owner) - go to the url you just generated and add the bot to the server (the bot should show as offline in the list of members)
+#  DO NOT DO THIS ?? (the bot should appear as a role)  -- make sure the bot is an admin - go to server settings, roles, add a role for 'admin' and turn on Administrator permission and add the bot to manage members
+#   I had issues with permissions when running the setup roles command and you have to also go to server settings - roles and drag the role named after the bot up above any other role so its at the top
+# type argus in the argus to run the bot
+# if it runs successfully and shows logged in and no 'errors' continue:
+#  in discord in rules channel created by the community creation process type:
+#   $sync
+#   /setup roles      (and lots of roles should populate in your discord server settings - roles)
+#   /setup channels   (and you will see the channels being configured on the left)
+#  for level 2 boosted servers:  /setup icons
+#   /global enable
+
+
+# COMMANDS - you can type "/" in chat and press tab to see available commands
+
+
+# SENTRY ERRORS - if sentry is configured and working errors will be sent there as well as to your email if configured that way
+# DATABASE - view your data at cloud.mongodb.com
+
+
+# one problem I ran into and resolved-
+# run argus, produces error
+    >argus
+    pydantic.errors.PydanticImportError: `pydantic.datetime_parse:parse_datetime` has been removed in V2.
+# poetry.lock refers to version 1.10.6 but reqs.txt is version 2.6.3 - chaning it to 1.10.6 , ran pip uninstall pydantic , then ran pip install pydantic==1.10.6, then re-run pip install -e .
+
+
+# note: I was able to use vscode to run __main__.py , enabled the python debugger extension, edit debug configuration and add a second configuration block in launch.json , add these lines
+# "request": "launch",
+# "purpose": ["debug-test"],
+# "justMyCode": false,
+# "subProcess": true,
+#
+#  hint: in def main() you can add async.io around the bot.run line then you can step into it:  asyncio.run(bot.run(config["bot"]["token"], log_handler=None))
+
+#  if you are having issues with pip commands, reboot then try removing these directories: (paths may be different on your system)
+#    C:\Users\yourusername\AppData\Local\pip\cache
+#    C:\Users\yourusername\AppData\Local\Temp
+#    then run: pip freeze > reqs.txt   ,   pip uninstall -y -r reqs.txt
+#    then run the pipinstall -e . and also run the mongodb and sentry pip installs
+
+
+TODO:
+ MANUAL - commands, use
+ better error checking / trapping for invalid command parameters
